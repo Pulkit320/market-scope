@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { LayoutDashboard, TrendingUp, Settings, Search, Menu } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import AnimatedBackground from './AnimatedBackground';
 
 const SidebarItem = ({ icon: Icon, label, path, isActive, onClick }) => (
     <Link
@@ -51,7 +52,8 @@ const Layout = () => {
     };
 
     return (
-        <div className="flex min-h-screen bg-background text-foreground font-sans">
+        <div className="flex min-h-screen bg-background text-foreground font-sans relative isolate">
+            <AnimatedBackground />
             {/* Mobile Sidebar Overlay */}
             <div
                 className={cn(

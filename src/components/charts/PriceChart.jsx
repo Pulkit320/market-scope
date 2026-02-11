@@ -1,13 +1,5 @@
 import React from 'react';
-import {
-    AreaChart,
-    Area,
-    XAxis,
-    YAxis,
-    CartesianGrid,
-    Tooltip,
-    ResponsiveContainer
-} from 'recharts';
+import { AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 
 const PriceChart = ({ data, color = "#2563eb" }) => {
     if (!data || data.length === 0) {
@@ -54,22 +46,40 @@ const PriceChart = ({ data, color = "#2563eb" }) => {
                         <stop offset="5%" stopColor={color} stopOpacity={0.3} />
                         <stop offset="95%" stopColor={color} stopOpacity={0} />
                     </linearGradient>
+                    <filter id="glow" height="300%" width="300%" x="-75%" y="-75%">
+                        <feGaussianBlur stdDeviation="4" result="coloredBlur" />
+                        <feMerge>
+                            <feMergeNode in="coloredBlur" />
+                            <feMergeNode in="SourceGraphic" />
+                        </feMerge>
+                    </filter>
                 </defs>
                 <XAxis
                     dataKey="date"
                     hide
                 />
                 <YAxis
-                    hide
                     domain={['auto', 'auto']}
+                    hide
                 />
-                <Tooltip content={<CustomTooltip />} />
+                <Tooltip
+                    contentStyle={{
+                        backgroundColor: "hsl(var(--card))",
+                        borderColor: "hsl(var(--border))",
+                        borderRadius: "8px",
+                        boxShadow: "0 4px 12px rgba(0,0,0,0.5)"
+                    }}
+                    itemStyle={{ color: "hsl(var(--foreground))" }}
+                    labelStyle={{ color: "hsl(var(--muted-foreground))", marginBottom: "0.5rem" }}
+                />
                 <Area
                     type="monotone"
                     dataKey="value"
                     stroke={color}
+                    strokeWidth={3}
                     fillOpacity={1}
                     fill="url(#colorValue)"
+                    style={{ filter: "url(#glow)" }}
                 />
             </AreaChart>
         </ResponsiveContainer>

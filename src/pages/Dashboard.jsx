@@ -103,12 +103,17 @@ const Dashboard = () => {
                                 <div key={asset.id} className="flex items-center">
                                     <div className="ml-4 space-y-1 flex-1">
                                         <p className="text-sm font-medium leading-none">{asset.name}</p>
-                                        <p className="text-sm text-muted-foreground">
-                                            Predicted: <span className="text-primary font-bold">${(asset.price * 1.05).toFixed(2)}</span>
+                                        <p className="text-xs text-muted-foreground">
+                                            Signal: <span className={asset.prediction.direction === 'up' ? "text-green-600 font-bold" : "text-red-600 font-bold"}>
+                                                {asset.prediction.label}
+                                            </span>
                                         </p>
                                     </div>
-                                    <div className="font-medium text-green-500 text-sm">
-                                        +5.0%
+                                    <div className={cn(
+                                        "font-medium text-sm",
+                                        asset.prediction.direction === 'up' ? "text-green-500" : "text-red-500"
+                                    )}>
+                                        {asset.prediction.confidence}%
                                     </div>
                                 </div>
                             ))}

@@ -10,6 +10,7 @@ export const MOCK_ASSETS = [
         change24h: 2.34,
         marketCap: 1200000000000,
         volume: 35000000000,
+        prediction: { direction: 'up', confidence: 87, label: 'Bullish' },
         history: Array.from({ length: 30 }, (_, i) => ({
             date: `2024-03-${i + 1}`,
             value: 60000 + Math.random() * 5000
@@ -23,6 +24,7 @@ export const MOCK_ASSETS = [
         change24h: -1.2,
         marketCap: 400000000000,
         volume: 15000000000,
+        prediction: { direction: 'down', confidence: 62, label: 'Bearish' },
         history: Array.from({ length: 30 }, (_, i) => ({
             date: `2024-03-${i + 1}`,
             value: 3200 + Math.random() * 400
@@ -36,6 +38,7 @@ export const MOCK_ASSETS = [
         change24h: 5.6,
         marketCap: 65000000000,
         volume: 4000000000,
+        prediction: { direction: 'up', confidence: 94, label: 'Strong Buy' },
         history: Array.from({ length: 30 }, (_, i) => ({
             date: `2024-03-${i + 1}`,
             value: 130 + Math.random() * 30
@@ -48,6 +51,7 @@ export const MOCK_ASSETS = [
         price: 924.50,
         change24h: 3.1, // AI Boom relevance
         type: 'stock',
+        prediction: { direction: 'up', confidence: 78, label: 'Bullish' },
         history: Array.from({ length: 30 }, (_, i) => ({
             date: `2024-03-${i + 1}`,
             value: 850 + Math.random() * 100

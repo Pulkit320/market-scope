@@ -6,6 +6,7 @@ import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import PriceChart from '@/components/charts/PriceChart';
 import ConfidenceGauge from '@/components/ui/confidence-gauge';
 import { ArrowLeft, RefreshCw } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
 const AssetDetail = () => {
     const { id } = useParams();
@@ -84,12 +85,17 @@ const AssetDetail = () => {
                         <CardContent>
                             <div className="space-y-2">
                                 <div className="flex justify-between items-center bg-background p-3 rounded-md border border-border">
-                                    <span className="text-sm font-medium">Predicted Price (7d)</span>
-                                    <span className="font-bold text-green-600">${(asset.price * 1.05).toFixed(2)}</span>
+                                    <span className="text-sm font-medium">Model Signal (7d)</span>
+                                    <span className={cn(
+                                        "font-bold px-2 py-1 rounded text-xs uppercase",
+                                        asset.prediction.direction === 'up' ? "bg-green-500/10 text-green-600" : "bg-red-500/10 text-red-600"
+                                    )}>
+                                        {asset.prediction.label}
+                                    </span>
                                 </div>
-                                <ConfidenceGauge score={87} />
+                                <ConfidenceGauge score={asset.prediction.confidence} />
                                 <p className="text-xs text-muted-foreground mt-2">
-                                    Our LSTM model predicts a bullish trend for {asset.name} based on recent volume spikes.
+                                    Our LSTM model predicts a {asset.prediction.direction === 'up' ? 'bullish' : 'bearish'} trend with {asset.prediction.confidence}% confidence.
                                 </p>
                             </div>
                         </CardContent>
